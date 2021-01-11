@@ -6,6 +6,10 @@ import Home from '../components/Home.vue'
 import Dashboard from '../components/Dashboard.vue'
 import Profile from '../views/Profile.vue'
 import App from '../App.vue'
+import AboutUs from '../components/AboutUs.vue'
+import Category from '../components/Category.vue'
+import ContactUs from '../components/ContactUs.vue'
+import Newsroom from '../components/Newsroom.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +43,26 @@ const routes = [
     path: '/',
     name: 'App',
     component: App
+  },
+  {
+    path: '/dashboard/aboutus',
+    name: 'AboutUs',
+    component: AboutUs
+  },
+  {
+    path: '/dashboard/category',
+    name: 'Category',
+    component: Category
+  },
+  {
+    path: '/dashboard/newsroom',
+    name: 'Newsroom',
+    component: Newsroom
+  },
+  {
+    path: '/dashboard/contactus',
+    name: 'ContactUs',
+    component: ContactUs
   },
 ]
 
