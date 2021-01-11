@@ -1,7 +1,7 @@
 <template>
   <div class="AboutUs">
     <div>
-      <v-container class="my-5">
+      <v-container class="">
         <v-layout row wrap class="mt-2 ">
           <v-flex lg6>
             <v-card width="500px">
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style>
-div.v-main__wrap {
+div.AboutUs {
   height: 100%;
   background-image: url("../assets/AboutUs.jpg");
   background-repeat: no-repeat;
