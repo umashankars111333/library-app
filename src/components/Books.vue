@@ -1,7 +1,9 @@
 <template>
   <div class="Books">
-    <div class="ml-20">
-      <img src="../assets/NotFound.jpg" width="500px" alt="Not Found.." v-show="notFound()" />
+    <div v-show="notFound()" class="ml-20 text-center noProductsFound">
+      <v-icon size="150" color="#DCDCDC">far fa-frown</v-icon>
+      <span class="text-h4 d-block mt-6" style="color: #148F77">Sorry! No products found</span>
+      <!-- <img src="../assets/NotFound.jpg" width="500px" alt="Not Found.." v-show="notFound()" /> -->
     </div>
 
     <div class="my-5" v-for="booksCategory in Object.keys(filterProduct)" :key="booksCategory">
@@ -44,18 +46,23 @@ export default {
       notFoundFlag: false,
     };
   },
+  beforeMount() {},
   methods: {
     notFound() {
-      console.log("..boks...", JSON.parse(JSON.stringify(this.filterProduct)));
-      Object.keys(this.filterProduct).forEach((booksCategory) => {
-        if (this.filterProduct[booksCategory].length > 0) {
-          this.notFoundFlag = false;
-        } else {
-          this.notFoundFlag = true;
-        }
-      });
-      console.log("boolean value", this.notFoundFlag);
-      return this.notFoundFlag;
+      // console.log("..boks...", JSON.parse(JSON.stringify(this.filterProduct)));
+      // Object.keys(this.filterProduct).forEach((booksCategory) => {
+      //   console.log("length..", this.filterProduct[booksCategory].length);
+      //   if (this.filterProduct[booksCategory].length > 0) {
+      //     console.log("if..");
+      //     this.notFoundFlag = false;
+      //     return this.notFoundFlag;
+      //   } else {
+      //     console.log("else..");
+      //     this.notFoundFlag = true;
+      //   }
+      // });
+      // return this.notFoundFlag;
+      return Object.keys(this.filterProduct).every((category) => (this.filterProduct[category].length == 0) == true);
     },
   },
 };

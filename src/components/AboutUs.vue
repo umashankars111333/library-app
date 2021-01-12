@@ -13,7 +13,7 @@
           </v-flex>
 
           <v-flex lg6 align-self-center style="border: 2px solid blue">
-            <!-- Sparklines -->
+            <!-- Sparklines Vue js-->
             <template>
               <v-sparkline
                 :value="value"

@@ -2,15 +2,16 @@
   <div class="Filters">
     <div class="filters text-right mt-5">
       <!-- Search By Title -->
-      <v-menu :close-on-content-click="false" :nudge-width="200" offset-y>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn class="primary large mr-5" justify="end" v-bind="attrs" v-on="on">
-            <v-icon left>fas fa-search</v-icon>
-            <span>Search</span>
-          </v-btn>
-        </template>
+      <v-hover>
+        <v-menu :close-on-content-click="closeSearchMenuOnContentClick" :nudge-width="200" offset-y>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn class="primary large mr-5" justify="end" v-bind="attrs" v-on="on" @click="closeSearchMenuOnContentClick = false">
+              <v-icon left>fas fa-search</v-icon>
+              <span>Search</span>
+            </v-btn>
+          </template>
 
-        <v-card>
+          <!-- <v-card> -->
           <v-list class="text-center">
             <v-list-item class="mt-3">
               <v-text-field label="Search" hide-details="auto" class="search mb-5 mx-auto" v-model="searchTitle"></v-text-field>
@@ -23,13 +24,14 @@
               </v-btn>
             </v-list-item>
           </v-list>
-        </v-card>
-      </v-menu>
+          <!-- </v-card> -->
+        </v-menu>
+      </v-hover>
 
       <!-- Search By Filter -->
-      <v-menu class="mr-5" :close-on-content-click="false" :nudge-width="200" offset-y>
+      <v-menu class="mr-5" :close-on-content-click="closeSearchMenuOnContentClick" :nudge-width="200" offset-y>
         <template v-slot:activator="{ on, attrs }">
-          <v-btn class="primary large mr-5" justify="end" v-bind="attrs" v-on="on">
+          <v-btn class="primary large mr-5" justify="end" v-bind="attrs" v-on="on" @click="closeSearchMenuOnContentClick = false">
             <v-icon left>fas fa-filter</v-icon>
             <span>Filter</span>
           </v-btn>
@@ -68,11 +70,13 @@ export default {
       filterCategory: "",
       sortValue: "false",
       localFilter: {},
+      closeSearchMenuOnContentClick: false,
       items: ["None", "Horror", "Thriller"],
     };
   },
   methods: {
     search() {
+      this.closeSearchMenuOnContentClick = true;
       this.localFilter = {};
       console.log(this.books);
 
@@ -93,11 +97,13 @@ export default {
 
       console.log("localFilter", JSON.parse(JSON.stringify(this.localFilter)));
       this.$emit("updateFilter", this.localFilter);
+      this.searchTitle = "";
     },
 
     filter() {
+      this.closeSearchMenuOnContentClick = true;
       this.localFilter = {};
-      if (this.filterCategory == "None") {
+      if (this.filterCategory == "None" || this.filterCategory == "") {
         this.localFilter = { ...this.books };
       }
       console.log("filterCat", this.filterCategory);
@@ -111,6 +117,7 @@ export default {
       });
       // console.log("localfil", JSON.parse(JSON.stringify(this.localFilter)));
       this.$emit("updateFilter", this.localFilter);
+      this.filterCategory = "";
     },
 
     sortBy(property) {
